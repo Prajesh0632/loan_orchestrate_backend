@@ -42,3 +42,6 @@ build/
 .pytest_cache/
 .coverage
 htmlcov/
+
+
+serviceAccountKey.json

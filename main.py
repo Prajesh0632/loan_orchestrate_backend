@@ -1,16 +1,21 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from auth import router as auth_router
+from database import init_firebase
 
-app = FastAPI()
+app = FastAPI(title="Loan Orchestrate API", version="1.0.0")
 
-class Details(BaseModel):
-    username:str 
-    password:str
+# Initialize Firebase
+init_firebase()
 
-@app.post("/api/login")
-async def login(item: Details):
-    return {
-        "username": item.username,
-        "password" : item.password
-            }
+# Include auth routes
+app.include_router(auth_router, prefix="/api", tags=["auth"])
+
+
+
+
+
+
+
+
+
 
