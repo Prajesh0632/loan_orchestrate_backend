@@ -1,10 +1,13 @@
+import os 
 from typing import Optional
 from database.users import get_user
 from datetime import datetime,timedelta,timezone
 import jwt
 from jwt.exceptions import InvalidTokenError
 from pwdlib import PasswordHash
-from auth.config import SECRET_KEY,ALGORITHM
+
+SECRET_KEY = os.getenv("SECRET_KEY", "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7")
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
 
 password_hash = PasswordHash.recommended()
 DUMMY_HASH = password_hash.hash("dummypassword")

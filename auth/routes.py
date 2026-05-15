@@ -1,10 +1,15 @@
+import os
 from fastapi import APIRouter,HTTPException,status
 from auth.models import UserLogin, UserSignup,Token
 from datetime import timedelta,datetime,timezone
 from database.users import get_user, create_user
 from auth.firebase_db import user_exists_in_firebase
 from auth.security import get_hash_password,authenticate_user,create_access_token
-from auth.config import ACCESS_TOKEN_EXPIRE_MINUTES
+
+
+
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+
 
 router = APIRouter()
 
