@@ -21,6 +21,7 @@ env/
 .env.local
 .env.*.local
 .env.production
+.env.example
 
 # Secrets & Credentials
 serviceAccountKey.json
