@@ -34,25 +34,20 @@ async def login(item:UserLogin):
 
 @router.post("/signup")
 async def signup(user: UserSignup):
+        exists = await user_exists_in_firebase(user.username)
+        if exists:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Username already registered"
+            )
+        try:
+            hashed_password = get_hash_password(user.password)
 
-    exists = await user_exists_in_firebase(user.username)
-    if exists:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Username already registered"
-        )
+            result = await create_user(user, hashed_password)
 
-    try:
-        hashed_password = get_hash_password(user.password)
-
-        result = await create_user(user, hashed_password)
-
-        return result
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Signup failed: {str(e)}"
-        )
-
-
-    
+            return result
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Signup failed: {str(e)}")
+        
