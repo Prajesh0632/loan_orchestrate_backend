@@ -9,3 +9,14 @@ class UserLogin(BaseModel):
 class UserSignup(BaseModel):
     username: str
     password: str
+    
+class Token(BaseModel):
+    access_token:str
+    token_type:str
+    
+class User(BaseModel):
+    username:str
+    disabled:bool
+    
+class TokenData(BaseModel):
+    username:str
