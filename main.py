@@ -8,7 +8,7 @@ import sys
 app = FastAPI(
     title="Loan Orchestrate API",
     version="1.0.0",
-    debug=settings.DEBUG
+    debug=settings.DEBUG 
 )
 
 print(f"Starting app in {settings.ENV} mode", file=sys.stderr)
