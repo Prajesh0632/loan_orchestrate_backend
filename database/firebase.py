@@ -8,7 +8,7 @@ db = None
 def init_firebase():
     global db
     
-    if settings.ENV == "production":
+    if settings.ENV.lower() == "production":
         # Production: Load from FIREBASE_KEY_JSON environment variable
         if not settings.FIREBASE_KEY_JSON:
             raise ValueError("FIREBASE_KEY_JSON environment variable is required in production mode")

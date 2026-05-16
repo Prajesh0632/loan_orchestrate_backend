@@ -2,7 +2,7 @@ import os
 from typing import Optional
 
 class Settings:
-    ENV = os.getenv("ENVIRONMENT", "development")
+    ENV = os.getenv("ENVIRONMENT", "development").lower()
     DEBUG = ENV == "development"
     
     # Firebase
