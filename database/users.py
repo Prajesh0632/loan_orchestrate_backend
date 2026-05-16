@@ -1,6 +1,5 @@
 from database.firebase import get_db
 from auth.models import UserSignup, UserLogin
-from fastapi import HTTPException,status
 
 
 async def create_user(user: UserSignup, hashed_password: str):
@@ -29,10 +28,7 @@ async def get_user(username:str):
     if doc.exists:
         return doc.to_dict()
     else:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User not found"
-        )
+        return None
         
     
    
