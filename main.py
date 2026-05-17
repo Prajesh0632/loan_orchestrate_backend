@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Depends,status
 from fastapi.middleware.cors import CORSMiddleware
 from auth import router as auth_router
 from database import init_firebase
 from config import settings
+from auth.security import authenticate_user
 import sys
 
 app = FastAPI(

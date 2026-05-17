@@ -16,7 +16,6 @@ class Token(BaseModel):
     
 class User(BaseModel):
     username:str
-    disabled:bool
     
 class TokenData(BaseModel):
     username:str
