@@ -1,5 +1,8 @@
 import os
 from typing import Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Settings:
     ENV = os.getenv("ENVIRONMENT", "development").lower()
@@ -18,6 +21,12 @@ class Settings:
     
     # CORS
     ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+
+    #Azure Storage
+    AZURE_STORAGE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    AZURE_BLOB_CONTAINER_NAME = (
+        "loan-documents" if ENV == "production" else "test-documents"
+    )
 
 settings = Settings()
 

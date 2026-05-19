@@ -90,7 +90,7 @@ async def loan_application(
       documents_metadata: str = Form(...),
       documents: list[UploadFile] = File(default=[]),
       document_titles: list[str] = Form(default=[]),
-      current_user = Depends(get_current_user),
+      current_user : User = Depends(get_current_user),
     ):
     
     response = await  handle_form_data(loan_type,
@@ -98,7 +98,8 @@ async def loan_application(
                                        documents_metadata,
                                        documents,
                                        document_titles,
-                                       current_user)
+                                       current_user.username
+                                       )
     if not response:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
