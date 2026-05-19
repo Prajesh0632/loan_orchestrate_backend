@@ -39,7 +39,7 @@ async def store_in_blob(
             file_bytes = await document.read()
             filename = document_titles[index]
             container_name = settings.AZURE_BLOB_CONTAINER_NAME
-            blob_path =  f"{current_user}/doc{doc_count}/{loan_type}/{filename}" 
+            blob_path =  f"{current_user}/doc{doc_count + 1}/{loan_type}/{filename}" 
 
             azure_url =  await upload_file(file_bytes, filename, container_name, blob_path)
 
@@ -93,7 +93,7 @@ async def upload_file(
 
 async def rollback_uploads(current_user : str, doc_count : int)->bool:
     
-    directory = f"{current_user}/doc{doc_count + 1}"
+    directory = f"{current_user}/doc{doc_count}"
     
     try:
         container_client = blob_service_client.get_container_client(settings.AZURE_BLOB_CONTAINER_NAME)
