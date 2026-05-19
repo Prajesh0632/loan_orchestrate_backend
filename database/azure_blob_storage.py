@@ -93,7 +93,7 @@ async def upload_file(
 
 async def rollback_uploads(current_user : str, doc_count : int)->bool:
     
-    directory = f"{current_user}/doc{doc_count}"
+    directory = f"{current_user}/doc{doc_count + 1}"
     
     try:
         container_client = blob_service_client.get_container_client(settings.AZURE_BLOB_CONTAINER_NAME)
