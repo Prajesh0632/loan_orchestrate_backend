@@ -142,7 +142,7 @@ async def store_form_data(
                                              )
 
     if  azure_response is None:
-        rollback_uploads(current_user, doc_count)
+        await rollback_uploads(current_user, doc_count)
         return False
 
 
@@ -156,8 +156,8 @@ async def store_form_data(
                             current_user)
     
     if firebase__response is None:
-        rollback_uploads(current_user, doc_count)
-        rollback_writes(current_user, doc_count)
+        await rollback_uploads(current_user, doc_count)
+        await rollback_writes(current_user, doc_count)
         return False
     
     
