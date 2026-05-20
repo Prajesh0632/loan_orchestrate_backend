@@ -5,20 +5,17 @@ from .loan_document_models import CommonLoanDocuments
  
 
 
-async def get_doc_count(current_user : str)->int:
-    db = get_db()
+async def get_doc_count(current_user: str) -> int:
+      db = get_db()
 
-    doc = db.collection("form-data").document(current_user)
-    doc_details = doc.get()
+      doc = db.collection("form-data").document(current_user)
+      doc_details = doc.get()
 
-    doc_count = 0
-    if doc_details.exists:
-        doc_data = doc_details.to_dict() or {}
-        doc_count = doc_data.get("count", 0)
-    else:
-        return None
+      if not doc_details.exists:
+          return 0
 
-    return doc_count    
+      doc_data = doc_details.to_dict() or {}
+      return doc_data.get("count", 0)
 
 
 
