@@ -50,7 +50,8 @@ async def store_in_blob(
 
         
     
-    except:
+    except Exception as error:
+        print(error)
         return None
 
     return urls 
@@ -104,7 +105,8 @@ async def rollback_uploads(current_user : str, doc_count : int)->bool:
 
         return True    
 
-    except:
+    except Exception as error:
+        print(error)
         return None        
 
     
